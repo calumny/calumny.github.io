@@ -118,8 +118,8 @@ d3.timer(function() {
   var dt = Date.now() - time;
   projection.rotate([ax, ay]);
   xval.innerHTML = "X: " + ax;
-  xval.innerHTML = "Y: " + ay;
-  xval.innerHTML = "Z: " + az;
+  yval.innerHTML = "Y: " + ay;
+  zval.innerHTML = "Z: " + az;
   sum.innerHTML = "Sum: " + sumVal;
   feature.attr("d", path);
 });
