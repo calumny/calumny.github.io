@@ -23,7 +23,7 @@ path {
 </style>
 <body>
     <img id="mute" src="mute.svg" style="position: absolute; width:150px;" />
-    <audio id="audio" src="beep.wav" autostart="false" ></audio>
+    <audio id="audio" src="beep.mp3" autostart="false" ></audio>
     <script>
     function PlaySound() {
           var sound = document.getElementById("audio");
@@ -46,6 +46,7 @@ path {
          else {
            document.getElementById('mute').src = 'mute.svg';
        }
+        document.getElementById('mute').style  = "position: absolute; width:150px;";
 
     }
     
@@ -152,7 +153,7 @@ function callback() {
     if (img.indexOf('mute.svg')==-1) {
         sound.play();
     }
-    interval = ax + ay; // actually this will kill your browser when goes to 0, but shows the idea
+    interval = Math.abs(ax) + Math.abs(ay) + 1; // actually this will kill your browser when goes to 0, but shows the idea
    setTimeout( callback, interval );
 }
 
