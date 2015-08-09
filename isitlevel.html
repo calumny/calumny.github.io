@@ -22,9 +22,18 @@ path {
 
 </style>
 <body>
+<span id="xval"></span>
+<span id="yval"></span>
+<span id="zval"></span>
+<span id="sum"></span>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script>
-
+    
+var xval = document.getElementById("xval");
+var yval = document.getElementById("yval");
+var zval = document.getElementById("zval");
+var sum = document.getElementById("sum");
+    
 var width = 1000,
     height = 1000,
     rotate = [10, -10],
@@ -102,10 +111,16 @@ var feature = svg.selectAll("path");
 
 var ax;
 var ay;
+var az;
+var sumVal;
     
 d3.timer(function() {
   var dt = Date.now() - time;
   projection.rotate([ax, ay]);
+  xval.innerHTML = "X: " + ax;
+  xval.innerHTML = "Y: " + ay;
+  xval.innerHTML = "Z: " + az;
+  sum.innerHTML = "Sum: " + sumVal;
   feature.attr("d", path);
 });
     
@@ -115,8 +130,10 @@ if (window.DeviceMotionEvent != undefined) {
 //    var gravityMult = 90 /9.80665;
 	window.ondevicemotion = function(e) {
         
-		ax = event.accelerationIncludingGravity.x * 5;
-		ay = event.accelerationIncludingGravity.y * 5;
+		ax = event.accelerationIncludingGravity.x * 1;
+		ay = event.accelerationIncludingGravity.y * 1;
+		az = event.accelerationIncludingGravity.z * 1;
+        sumVal = ax + ay + az;
 //        projection.rotate([ax, ay]);
 //		document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
 //		document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
