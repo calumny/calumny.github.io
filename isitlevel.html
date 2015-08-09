@@ -153,16 +153,8 @@ d3.timer(function() {
   feature.attr("d", path);
 //          sound.play()
 });
-
-if (window.DeviceOrientationEvent != undefined) {
-//    var gravityMult = 90 /9.80665;
-        window.ondeviceorientation = function(e) {
-        
-		ax = -1 * event.gamma;
-		ay = event.beta;
-		az = event.alpha;
-		}		
-	} else if (window.DeviceMotionEvent != undefined) {
+    
+    if (window.DeviceMotionEvent != undefined) {
 //    var gravityMult = 90 /9.80665;
         window.ondevicemotion = function(e) {
         
@@ -179,7 +171,15 @@ if (window.DeviceOrientationEvent != undefined) {
 //			document.getElementById("rotationBeta").innerHTML = e.rotationRate.beta;
 //			document.getElementById("rotationGamma").innerHTML = e.rotationRate.gamma;
 		}		
-	}
+	} else if (window.DeviceOrientationEvent != undefined) {
+//    var gravityMult = 90 /9.80665;
+        window.ondeviceorientation = function(e) {
+        
+		ax = -1 * event.gamma;
+		ay = event.beta;
+		az = event.alpha;
+		}		
+	}  
 
 </script>
 </body>
