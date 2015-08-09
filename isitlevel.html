@@ -112,16 +112,10 @@ var feature = svg.selectAll("path");
 var ax;
 var ay;
 var az;
-var sumVal;
     
 d3.timer(function() {
   var dt = Date.now() - time;
-  var mult = 90/sumVal;
-  projection.rotate([ax*mult, ay*mult, az*mult - 90]);
-  xval.innerHTML = "X: " + ax;
-  yval.innerHTML = "Y: " + ay;
-  zval.innerHTML = "Z: " + az;
-  sum.innerHTML = "Sum: " + sumVal;
+  projection.rotate([ax, ay]);
   feature.attr("d", path);
 });
     
@@ -131,10 +125,9 @@ if (window.DeviceMotionEvent != undefined) {
 //    var gravityMult = 90 /9.80665;
 	window.ondevicemotion = function(e) {
         
-		ax = event.accelerationIncludingGravity.x * 1;
-		ay = event.accelerationIncludingGravity.y * 1;
-		az = event.accelerationIncludingGravity.z * 1;
-        sumVal = ax + ay + az;
+		ax = event.accelerationIncludingGravity.x * 9;
+		ay = event.accelerationIncludingGravity.y * 9;
+		az = event.accelerationIncludingGravity.z * 9;
 //        projection.rotate([ax, ay]);
 //		document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
 //		document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
