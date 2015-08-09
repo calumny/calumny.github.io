@@ -22,12 +22,35 @@ path {
 
 </style>
 <body>
+    <img id="mute" src="mute.svg" style="position: absolute; width:150px;" />
+    <audio id="audio" src="beep.wav" autostart="false" ></audio>
+    <script>
+    function PlaySound() {
+          var sound = document.getElementById("audio");
+          sound.play()
+      }
+    </script>
 <span id="xval"></span>
 <span id="yval"></span>
 <span id="zval"></span>
 <span id="sum"></span>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script>
+
+
+    function chngimg() {
+        var img = document.getElementById('mute').src;
+        if (img.indexOf('mute.svg')!=-1) {
+            document.getElementById('mute').src  = 'speaker.svg';
+        }
+         else {
+           document.getElementById('mute').src = 'mute.svg';
+       }
+
+    }
+    
+var muteButton = document.getElementById('mute');
+muteButton.onclick = function(){chngimg();};
     
 var xval = document.getElementById("xval");
 var yval = document.getElementById("yval");
@@ -108,6 +131,7 @@ svg.append("line")
     .style("stroke", "black");
 
 var feature = svg.selectAll("path");
+var sound = document.getElementById("audio");
 
 var ax;
 var ay;
@@ -117,7 +141,23 @@ d3.timer(function() {
   var dt = Date.now() - time;
   projection.rotate([ax, ay]);
   feature.attr("d", path);
+//          sound.play()
 });
+    
+var interval = 1000;
+
+function callback() {
+
+    var img = document.getElementById('mute').src;
+    if (img.indexOf('mute.svg')==-1) {
+        sound.play();
+    }
+    interval = ax + ay; // actually this will kill your browser when goes to 0, but shows the idea
+   setTimeout( callback, interval );
+}
+
+setTimeout( callback, 1000 );
+    
     
     
 
