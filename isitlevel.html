@@ -97,9 +97,12 @@ svg.append("line")
 
 var feature = svg.selectAll("path");
 
+var ax;
+var ay;
+    
 d3.timer(function() {
   var dt = Date.now() - time;
-//  projection.rotate([10, 70]);
+  projection.rotate([ax, ay]);
   feature.attr("d", path);
 });
     
@@ -111,7 +114,7 @@ if (window.DeviceMotionEvent != undefined) {
         
 		ax = event.accelerationIncludingGravity.x * 5;
 		ay = event.accelerationIncludingGravity.y * 5;
-        projection.rotate([ax, ay]);
+//        projection.rotate([ax, ay]);
 //		document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
 //		document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
 //		document.getElementById("accelerationZ").innerHTML = e.accelerationIncludingGravity.z;
