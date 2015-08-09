@@ -106,10 +106,12 @@ d3.timer(function() {
     
 
 if (window.DeviceMotionEvent != undefined) {
+    var gravityMult = 90 /9.80665;
 	window.ondevicemotion = function(e) {
-		ax = event.accelerationIncludingGravity.x * 10;
-		ay = event.accelerationIncludingGravity.y * 10;
-	projection.rotate([ax, ay]);
+        
+		ax = event.accelerationIncludingGravity.x * gravityMult;
+		ay = event.accelerationIncludingGravity.y * gravityMult;
+        projection.rotate([ax, ay]);
 //		document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
 //		document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
 //		document.getElementById("accelerationZ").innerHTML = e.accelerationIncludingGravity.z;
