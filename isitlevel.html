@@ -38,10 +38,24 @@ path {
 <script>
 
 
+    
+var interval = 1000;
+
+function callback() {
+
+    var img = document.getElementById('mute').src;
+    if (img.indexOf('mute.svg')==-1) {
+        sound.play();
+        interval = Math.abs(ax) + Math.abs(ay) + 1; // actually this will kill your browser when goes to 0, but shows the idea
+        setTimeout( callback, interval );
+    }
+}
+    
     function chngimg() {
         var img = document.getElementById('mute').src;
         if (img.indexOf('mute.svg')!=-1) {
             document.getElementById('mute').src  = 'speaker.svg';
+            setTimeout( callback, 100 );
         }
          else {
            document.getElementById('mute').src = 'mute.svg';
@@ -144,20 +158,7 @@ d3.timer(function() {
   feature.attr("d", path);
 //          sound.play()
 });
-    
-var interval = 1000;
 
-function callback() {
-
-    var img = document.getElementById('mute').src;
-    if (img.indexOf('mute.svg')==-1) {
-        sound.play();
-    }
-    interval = Math.abs(ax) + Math.abs(ay) + 1; // actually this will kill your browser when goes to 0, but shows the idea
-   setTimeout( callback, interval );
-}
-
-setTimeout( callback, 1000 );
     
     
     
