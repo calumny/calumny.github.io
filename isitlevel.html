@@ -158,7 +158,7 @@ if (window.DeviceOrientationEvent != undefined) {
 //    var gravityMult = 90 /9.80665;
         window.ondeviceorientation = function(e) {
         
-		ax = event.gamma;
+		ax = -1 * event.gamma;
 		ay = event.beta;
 		az = event.alpha;
 		}		
