@@ -117,7 +117,7 @@ var sumVal;
 d3.timer(function() {
   var dt = Date.now() - time;
   var mult = 90/sumVal;
-  projection.rotate([ax*mult, ay*mult, az*mult]);
+  projection.rotate([ax*mult, ay*mult, az*mult - 90]);
   xval.innerHTML = "X: " + ax;
   yval.innerHTML = "Y: " + ay;
   zval.innerHTML = "Z: " + az;
