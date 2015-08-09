@@ -22,8 +22,8 @@ path {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script>
 
-var width = 1500,
-    height = 1500,
+var width = 1000,
+    height = 1000,
     rotate = [10, -10],
     velocity = [.003, -.001],
     time = Date.now();
@@ -65,8 +65,8 @@ svg.append("path")
 
 
 svg.append("circle")
-    .attr("cx", 750)
-    .attr("cy", 750)
+    .attr("cx", width/2)
+    .attr("cy", width/2)
     .attr("r", 33)
     .style("fill", "none")
     .style("stroke", "black")
@@ -74,25 +74,25 @@ svg.append("circle")
 
 
 svg.append("circle")
-    .attr("cx", 750)
-    .attr("cy", 750)
+    .attr("cx", width/2)
+    .attr("cy", width/2)
     .attr("r", 150)
     .style("fill", "none")
     .style("stroke", "red")
     .style("stroke-width", 3);
 
 svg.append("line")
-    .attr("x1", 750)
-    .attr("y1", 600)
-    .attr("x2", 750)
-    .attr("y2", 900)
+    .attr("x1", width/2)
+    .attr("y1", width/2 - 150)
+    .attr("x2", width/2)
+    .attr("y2", width/2 + 150)
     .style("stroke", "black");
  
 svg.append("line")
-    .attr("y1", 750)
-    .attr("x1", 600)
-    .attr("y2", 750)
-    .attr("x2", 900)
+    .attr("y1", width/2)
+    .attr("x1", width/2 - 150)
+    .attr("y2", width/2)
+    .attr("x2", width/2 + 150)
     .style("stroke", "black");
 
 var feature = svg.selectAll("path");
