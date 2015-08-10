@@ -192,7 +192,7 @@ function switchOrientation(orient) {
 //            setupGlobe();
         case 1:
             d3.selectAll(".graticule").style("stroke", "white");
-            setupVertical();
+//            setupVertical();
     }
 }
 var sound = document.getElementById("audio");
@@ -211,7 +211,7 @@ var sound = document.getElementById("audio");
         } else if (ax > 45) {
             ori = 2;
         } else {
-            ori = 0      
+            ori = 0;
         }
             if (prevOrientation != ori) {
                 switchOrientation(ori);   
