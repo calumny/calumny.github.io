@@ -207,7 +207,7 @@ d3.timer(function() {
         var prevOrientation = orientation;
         if (Math.abs(ay) > 20) {
             orientation = 1;
-            alert(orientation);
+            setupVertical();
         } else if (ax > 45) {
             orientation = 2;
         }
