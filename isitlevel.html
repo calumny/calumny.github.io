@@ -154,9 +154,8 @@ var curr = Date.now();
 d3.timer(function() {
     
     curr = Date.now();
-    
-  var dt = curr - time;
-    time = now;
+    var dt = curr - time;
+    time = curr;
     prevAx = rotate[0];
     prevAy = rotate[1];
     var diffX = ax - prevAx;
