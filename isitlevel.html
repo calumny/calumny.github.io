@@ -69,7 +69,7 @@ var sum = document.getElementById("sum");
     
 var width = 1000,
     height = 1000,
-    rotate = [0, 0],
+    rotate = [10, -10],
     velocity = [.003, -.001],
     time = Date.now();
 
@@ -143,55 +143,18 @@ svg.append("line")
 var feature = svg.selectAll("path");
 var sound = document.getElementById("audio");
 
-var ax = 0;
-var ay = 0;
-var az = 0;
-var prevAx = 0;
-var prevAy = 0;
-var vel = 10;
-var curr = Date.now();
-
+var ax;
+var ay;
+var az;
+    
 d3.timer(function() {
-    
-    curr = Date.now();
-    var dt = curr - time;
-    time = curr;
-    prevAx = rotate[0];
-    prevAy = rotate[1];
-    var diffX = ax - prevAx;
-    var diffY = ay - prevAy;
-    var xSign = diffX?diffX<0?-1:1:0;
-    var ySign = diffY?diffY<0?-1:1:0;
-    var incX = 0;
-    if (Math.abs(diffX) > vel) {
-        incX = vel * xSign;
-    } else {
-        incX = diffX;
-    }
-    var incY = 0;
-    if (Math.abs(diffY) > vel) {
-        incY = vel * ySign;
-    } else {
-        incY = diffY;
-    }
-    rotate[0] = (prevAx + incX) % 360;
-    rotate[1] = (prevAy + incY) % 360;
-  projection.rotate([rotate[0], rotate[1]]);
-//  projection.rotate([ax, ay]);
-/*    projection
-      .transition()
-      .duration(20)
-      .attrTween("transform", tween);
-    
-    function tween(d, i, a) {
-      return d3.interpolateString("rotate(" + rotate[0] + "," +rotate[1] +")", "rotate(" + ax + "," +ay +")");
-    }
-*/    
+  var dt = Date.now() - time;
+  projection.rotate([ax, ay]);
   feature.attr("d", path);
 //          sound.play()
 });
-    
-    if (window.DeviceOrientationEvent != undefined) {
+
+if (window.DeviceOrientationEvent != undefined) {
 //    var gravityMult = 90 /9.80665;
         window.ondeviceorientation = function(e) {
         
@@ -206,8 +169,17 @@ d3.timer(function() {
 		ax = event.accelerationIncludingGravity.x * 5;
 		ay = event.accelerationIncludingGravity.y * 5;
 		az = event.accelerationIncludingGravity.z * 5;
+//        projection.rotate([ax, ay]);
+//		document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
+//		document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
+//		document.getElementById("accelerationZ").innerHTML = e.accelerationIncludingGravity.z;
+
+//		if ( e.rotationRate ) {
+//			document.getElementById("rotationAlpha").innerHTML = e.rotationRate.alpha;
+//			document.getElementById("rotationBeta").innerHTML = e.rotationRate.beta;
+//			document.getElementById("rotationGamma").innerHTML = e.rotationRate.gamma;
 		}		
-	}  
+	}
 
 </script>
 </body>
