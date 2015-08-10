@@ -87,6 +87,11 @@ var path = d3.geo.path()
 
 var graticule = d3.geo.graticule();
     
+    
+var ax;
+var ay;
+var az;
+    
 var svg;
 
 //var circle = d3.geo.circle().attr("r", 10);
@@ -144,6 +149,16 @@ svg = d3.select("body").append("svg")
             .attr("y2", width/2)
             .attr("x2", width/2 + 150)
             .style("stroke", "black");
+
+        var feature = svg.selectAll("path");
+        
+    
+        d3.timer(function() {
+          var dt = Date.now() - time;
+          projection.rotate([ax, ay]);
+          feature.attr("d", path);
+        //          sound.play()
+        });
     }
     
 function setupVertical() { 
@@ -177,20 +192,8 @@ function switchOrientation(orient) {
             setupVertical();
     }
 }
-
-var feature = svg.selectAll("path");
 var sound = document.getElementById("audio");
 
-var ax;
-var ay;
-var az;
-    
-d3.timer(function() {
-  var dt = Date.now() - time;
-  projection.rotate([ax, ay]);
-  feature.attr("d", path);
-//          sound.play()
-});
     
     if (window.DeviceMotionEvent != undefined) {
 //    var gravityMult = 90 /9.80665;
