@@ -86,12 +86,14 @@ var path = d3.geo.path()
     .pointRadius(30);
 
 var graticule = d3.geo.graticule();
+    
+var svg;
 
 //var circle = d3.geo.circle().attr("r", 10);
 
     function setupGlobe() {
 
-        var svg = d3.select("body").append("svg")
+        svg = d3.select("body").append("svg")
             .attr("width", width)
             .attr("height", height);
 
@@ -146,7 +148,7 @@ var graticule = d3.geo.graticule();
     }
     
 function setupVertical() {
-        var svg = d3.select("body").append("svg")
+        svg = d3.select("body").append("svg")
             .attr("width", width)
             .attr("height", height);   
     
