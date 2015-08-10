@@ -22,46 +22,9 @@ path {
 
 </style>
 <body>
-    <!--img id="mute" src="mute.svg" style="position: absolute; width:150px;" /-->
-    <!--audio id="audio" src="beep.mp3" autostart="false" ></audio-->
-<span id="xval"></span>
-<span id="yval"></span>
-<span id="zval"></span>
-<span id="sum"></span>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script>
 
-/*
- var sound = document.getElementById("audio");
-    
-var interval = 100;
-
-function callback() {
-
-    var img = document.getElementById('mute').src;
-    if (img.indexOf('mute.svg')==-1) {
-        sound.play();
-        interval = Math.abs(ax) + Math.abs(ay) + 1; // actually this will kill your browser when goes to 0, but shows the idea
-        setTimeout( callback, 10*interval );
-    }
-}
-    
-    function chngimg() {
-        var img = document.getElementById('mute').src;
-        if (img.indexOf('mute.svg')!=-1) {
-            document.getElementById('mute').src  = 'speaker.svg';
-            setTimeout( callback, 100 );
-        }
-         else {
-           document.getElementById('mute').src = 'mute.svg';
-       }
-        document.getElementById('mute').style  = "position: absolute; width:150px;";
-
-    }
-    
-var muteButton = document.getElementById('mute');
-muteButton.onclick = function(){chngimg();};
-*/    
 var xval = document.getElementById("xval");
 var yval = document.getElementById("yval");
 var zval = document.getElementById("zval");
@@ -161,15 +124,6 @@ d3.timer(function() {
 		ax = event.accelerationIncludingGravity.x * 5;
 		ay = event.accelerationIncludingGravity.y * 5;
 		az = event.accelerationIncludingGravity.z * 5;
-//        projection.rotate([ax, ay]);
-//		document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
-//		document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
-//		document.getElementById("accelerationZ").innerHTML = e.accelerationIncludingGravity.z;
-
-//		if ( e.rotationRate ) {
-//			document.getElementById("rotationAlpha").innerHTML = e.rotationRate.alpha;
-//			document.getElementById("rotationBeta").innerHTML = e.rotationRate.beta;
-//			document.getElementById("rotationGamma").innerHTML = e.rotationRate.gamma;
 		}		
 	} else if (window.DeviceOrientationEvent != undefined) {
     var gravityMult = 90 /9.80665;
