@@ -185,11 +185,13 @@ function setupVertical() {
 setupGlobe();
     
 function switchOrientation(orient) {
-    svg.selectAll("*").remove();
+//    svg.selectAll("*").remove();
     switch(orient) {
         case 0:
-            setupGlobe();
+            graticule.style("stroke", "#FFF")
+//            setupGlobe();
         case 1:
+            graticule.style("stroke", "#AAA")
             setupVertical();
     }
 }
@@ -212,7 +214,7 @@ var sound = document.getElementById("audio");
             ori = 0      
         }
             if (prevOrientation != ori) {
-//                switchOrientation(ori);   
+                switchOrientation(ori);   
             }
 //        projection.rotate([ax, ay]);
 //		document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
