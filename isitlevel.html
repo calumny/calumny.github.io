@@ -67,7 +67,7 @@ var yval = document.getElementById("yval");
 var zval = document.getElementById("zval");
 var sum = document.getElementById("sum");
     
-orientation = 0;
+ori;
     
 var width = 1000,
     height = 1000,
@@ -204,17 +204,16 @@ d3.timer(function() {
 		ax = event.accelerationIncludingGravity.x * 5;
 		ay = event.accelerationIncludingGravity.y * 5;
 		az = event.accelerationIncludingGravity.z * 5;
-        var prevOrientation = orientation;
+        var prevOrientation = ori;
         if (Math.abs(ay) > 20) {
-            orientation = 1;
-            d3.select("svg")
-               .remove();
-            setupVertical();
+            ori = 1;
         } else if (ax > 45) {
-            orientation = 2;
+            ori = 2;
+        } else {
+            ori = 0      
         }
-            if (prevOrientation != orientation) {
-                switchOrientation(orientation);   
+            if (prevOrientation != ori) {
+                switchOrientation(ori);   
             }
 //        projection.rotate([ax, ay]);
 //		document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
