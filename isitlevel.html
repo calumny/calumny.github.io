@@ -205,9 +205,9 @@ d3.timer(function() {
 		ay = event.accelerationIncludingGravity.y * 5;
 		az = event.accelerationIncludingGravity.z * 5;
         var prevOrientation = orientation;
-            alert(orientation);
         if (Math.abs(ay) > 20) {
             orientation = 1;
+            alert(orientation);
         } else if (ax > 45) {
             orientation = 2;
         }
