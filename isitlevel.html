@@ -154,21 +154,21 @@ d3.timer(function() {
 //          sound.play()
 });
     
-    if (window.DeviceMotionEvent != undefined) {
-//    var gravityMult = 90 /9.80665;
-        window.ondevicemotion = function(e) {
-        
-		ax = event.accelerationIncludingGravity.x * 5;
-		ay = event.accelerationIncludingGravity.y * 5;
-		az = event.accelerationIncludingGravity.z * 5;
-		}		
-	} else if (window.DeviceOrientationEvent != undefined) {
+    if (window.DeviceOrientationEvent != undefined) {
 //    var gravityMult = 90 /9.80665;
         window.ondeviceorientation = function(e) {
         
 		ax = -1 * event.gamma;
 		ay = event.beta;
 		az = event.alpha;
+		}		
+	} else if (window.DeviceMotionEvent != undefined) {
+//    var gravityMult = 90 /9.80665;
+        window.ondevicemotion = function(e) {
+        
+		ax = event.accelerationIncludingGravity.x * 5;
+		ay = event.accelerationIncludingGravity.y * 5;
+		az = event.accelerationIncludingGravity.z * 5;
 		}		
 	}  
 
