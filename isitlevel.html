@@ -146,11 +146,21 @@ var sound = document.getElementById("audio");
 var ax;
 var ay;
 var az;
-    
+var prevAx;
+var prevAy;
+var vel = 0.02
+
 d3.timer(function() {
   var dt = Date.now() - time;
+    prevAx = rotate[0];
+    prevAy = rotate[1];
+    var diffX = ax - prevAx;
+    var diffY = ay - prevAy;
+    rotate[0] = prevAx + diffX * dt * vel;
+    rotate[1] = prevAy + diffY * dt * vel;
+  projection.rotate([rotate[0], rotate[1]]);
 //  projection.rotate([ax, ay]);
-    projection
+/*    projection
       .transition()
       .duration(20)
       .attrTween("transform", tween);
@@ -158,7 +168,7 @@ d3.timer(function() {
     function tween(d, i, a) {
       return d3.interpolateString("rotate(" + rotate[0] + "," +rotate[1] +")", "rotate(" + ax + "," +ay +")");
     }
-    
+*/    
   feature.attr("d", path);
 //          sound.play()
 });
