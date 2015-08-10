@@ -166,6 +166,7 @@ d3.timer(function() {
     } else {
         incX = diffX;
     }
+    alert(incX);
     rotate[0] = (prevAx + incX) % 360;
     rotate[1] = (prevAy + dt * vel) % 360;
   projection.rotate([rotate[0], rotate[1]]);
