@@ -185,18 +185,14 @@ function setupVertical() {
 setupGlobe();
     
 function switchOrientation(orient) {
-//    svg.selectAll("*").remove();
+    svg.selectAll("*").remove();
     switch(orient) {
         case 0:
-            alert(orient);
-            d3.selectAll(".graticule").style("stroke", "red");
+            setupGlobe();
             break;
-//            setupGlobe();
         case 1:
-            alert(orient);
-            d3.selectAll(".graticule").style("stroke", "white");
+            setupVertical();
             break;
-//            setupVertical();
     }
 }
 var sound = document.getElementById("audio");
