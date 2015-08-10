@@ -95,11 +95,16 @@ var az;
 var svg;
 
 //var circle = d3.geo.circle().attr("r", 10);
-svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
 
     function setupGlobe() {
+
+        d3.select("svg")
+       .remove();
+        
+        
+        svg = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height);
 
         svg.append("path")
             .datum({type: "Sphere"})
@@ -162,6 +167,14 @@ svg = d3.select("body").append("svg")
     }
     
 function setupVertical() { 
+
+        d3.select("svg")
+       .remove();
+        
+        
+        svg = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height);
     
         var lineData = [ { "x": 100,   "y": 100},  { "x": 900,  "y": 100},
                      { "x": 900,  "y": 300}, { "x": 100,  "y": 300},
@@ -184,7 +197,6 @@ function setupVertical() {
 setupGlobe();
     
 function switchOrientation(orient) {
-    svg.selectAll("*").remove();
     switch(orient) {
         case 0:
             setupGlobe();
