@@ -162,6 +162,7 @@ d3.timer(function() {
     var diffY = ay - prevAy;
     var incX =  diffX * dt;
     var incY =  diffY * dt;
+    alert(incX);
     if (Math.abs(incX) > vel) {
         rotate[0] = (prevAx + Math.sign(incX) * vel) % 360;    
     } else {
