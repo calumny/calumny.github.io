@@ -148,7 +148,7 @@ var ay = 0;
 var az = 0;
 var prevAx = 0;
 var prevAy = 0;
-var vel = 0.02;
+var vel = 2;
 var curr = Date.now();
 
 d3.timer(function() {
@@ -168,9 +168,14 @@ d3.timer(function() {
     } else {
         incX = diffX;
     }
-    alert(incX);
+    var incY = 0;
+    if (Math.abs(diffY) > vel) {
+        incY = vel * ySign;
+    } else {
+        incY = diffY;
+    }
     rotate[0] = (prevAx + incX) % 360;
-    rotate[1] = (prevAy + dt * vel) % 360;
+    rotate[1] = (prevAy + incY) % 360;
   projection.rotate([rotate[0], rotate[1]]);
 //  projection.rotate([ax, ay]);
 /*    projection
