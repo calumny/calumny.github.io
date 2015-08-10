@@ -90,12 +90,11 @@ var graticule = d3.geo.graticule();
 var svg;
 
 //var circle = d3.geo.circle().attr("r", 10);
+svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
 
     function setupGlobe() {
-
-        svg = d3.select("body").append("svg")
-            .attr("width", width)
-            .attr("height", height);
 
         svg.append("path")
             .datum({type: "Sphere"})
@@ -147,10 +146,7 @@ var svg;
             .style("stroke", "black");
     }
     
-function setupVertical() {
-        svg = d3.select("body").append("svg")
-            .attr("width", width)
-            .attr("height", height);   
+function setupVertical() { 
     
         var lineData = [ { "x": 100,   "y": 100},  { "x": 900,  "y": 100},
                      { "x": 900,  "y": 300}, { "x": 100,  "y": 300},
@@ -173,8 +169,7 @@ function setupVertical() {
 setupGlobe();
     
 function switchOrientation(orient) {
-    d3.select("svg")
-       .remove();
+    svg.selectAll("*").remove();
     switch(orient) {
         case 0:
             setupGlobe();
