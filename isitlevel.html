@@ -186,12 +186,13 @@ setupGlobe();
     
 function switchOrientation(orient) {
 //    svg.selectAll("*").remove();
-    alert(orient);
     switch(orient) {
         case 0:
+            alert(orient);
             d3.selectAll(".graticule").style("stroke", "red");
 //            setupGlobe();
         case 1:
+            alert(orient);
             d3.selectAll(".graticule").style("stroke", "white");
 //            setupVertical();
     }
