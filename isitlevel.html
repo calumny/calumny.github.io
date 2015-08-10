@@ -67,8 +67,6 @@ var yval = document.getElementById("yval");
 var zval = document.getElementById("zval");
 var sum = document.getElementById("sum");
     
-var ori = 0;
-    
 var width = 1000,
     height = 1000,
     rotate = [10, -10],
@@ -86,121 +84,75 @@ var path = d3.geo.path()
     .pointRadius(30);
 
 var graticule = d3.geo.graticule();
-    
-    
+
+//var circle = d3.geo.circle().attr("r", 10);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("path")
+    .datum({type: "Sphere"})
+    .attr("class", "sphere")
+    .attr("d", path);
+
+svg.append("path")
+    .datum(graticule)
+    .attr("class", "graticule")
+    .attr("d", path);
+
+svg.append("path")
+    .datum({type: "Point", coordinates: [0,0]})
+//    .pointRadius(10)
+    .attr("class", "equator")
+    .style("fill", "red")
+    .attr("d", path);
+
+
+svg.append("circle")
+    .attr("cx", width/2)
+    .attr("cy", width/2)
+    .attr("r", 33)
+    .style("fill", "none")
+    .style("stroke", "black")
+    .style("stroke-width", 3);
+
+
+svg.append("circle")
+    .attr("cx", width/2)
+    .attr("cy", width/2)
+    .attr("r", 150)
+    .style("fill", "none")
+    .style("stroke", "red")
+    .style("stroke-width", 3);
+
+svg.append("line")
+    .attr("x1", width/2)
+    .attr("y1", width/2 - 150)
+    .attr("x2", width/2)
+    .attr("y2", width/2 + 150)
+    .style("stroke", "black");
+ 
+svg.append("line")
+    .attr("y1", width/2)
+    .attr("x1", width/2 - 150)
+    .attr("y2", width/2)
+    .attr("x2", width/2 + 150)
+    .style("stroke", "black");
+
+var feature = svg.selectAll("path");
+var sound = document.getElementById("audio");
+
 var ax;
 var ay;
 var az;
     
-var svg;
-    
-svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-//var circle = d3.geo.circle().attr("r", 10);
-
-    function setupGlobe() {
-
-        svg.append("path")
-            .datum({type: "Sphere"})
-            .attr("class", "sphere")
-            .attr("d", path);
-
-        svg.append("path")
-            .datum(graticule)
-            .attr("class", "graticule")
-            .attr("d", path);
-
-        svg.append("path")
-            .datum({type: "Point", coordinates: [0,0]})
-        //    .pointRadius(10)
-            .attr("class", "equator")
-            .style("fill", "red")
-            .attr("d", path);
-
-
-        svg.append("circle")
-            .attr("cx", width/2)
-            .attr("cy", width/2)
-            .attr("r", 33)
-            .style("fill", "none")
-            .style("stroke", "black")
-            .style("stroke-width", 3);
-
-
-        svg.append("circle")
-            .attr("cx", width/2)
-            .attr("cy", width/2)
-            .attr("r", 150)
-            .style("fill", "none")
-            .style("stroke", "red")
-            .style("stroke-width", 3);
-
-        svg.append("line")
-            .attr("x1", width/2)
-            .attr("y1", width/2 - 150)
-            .attr("x2", width/2)
-            .attr("y2", width/2 + 150)
-            .style("stroke", "black");
-
-        svg.append("line")
-            .attr("y1", width/2)
-            .attr("x1", width/2 - 150)
-            .attr("y2", width/2)
-            .attr("x2", width/2 + 150)
-            .style("stroke", "black");
-
-        var feature = svg.selectAll("path");
-        
-    
-        d3.timer(function() {
-          var dt = Date.now() - time;
-          projection.rotate([ax, ay]);
-          feature.attr("d", path);
-        //          sound.play()
-        });
-    }
-    
-function setupVertical() { 
-/*    
-        var lineData = [ { "x": 100,   "y": 100},  { "x": 900,  "y": 100},
-                     { "x": 900,  "y": 300}, { "x": 100,  "y": 300},
-                     { "x": 100,  "y": 100}];
-
-        //This is the accessor function we talked about above
-        var lineFunction = d3.svg.line()
-                                 .x(function(d) { return d.x; })
-                                 .y(function(d) { return d.y; })
-                                 .interpolate("linear");
-
-        //The line SVG Path we draw
-        var lineGraph = svg.append("path")
-                                    .attr("d", lineFunction(lineData))
-                                    .attr("stroke", "blue")
-                                    .attr("stroke-width", 2)
-                                    .attr("fill", "none");*/
-}
-    
-setupGlobe();
-    
-function switchOrientation(orient) {
-//    svg.selectAll("*").remove();
-    switch(orient) {
-        case 0:
-            alert(orient);
-            d3.selectAll(".graticule").style("stroke", "#aaa");
-            break;
-//            setupGlobe();
-        case 1:
-            alert(orient);
-            d3.selectAll("*").style("stroke", "white");
-            break;
-//            setupVertical();
-    }
-}
-var sound = document.getElementById("audio");
-
+d3.timer(function() {
+  var dt = Date.now() - time;
+  projection.rotate([ax, ay]);
+  feature.attr("d", path);
+//          sound.play()
+});
     
     if (window.DeviceMotionEvent != undefined) {
 //    var gravityMult = 90 /9.80665;
@@ -209,26 +161,6 @@ var sound = document.getElementById("audio");
 		ax = event.accelerationIncludingGravity.x * 5;
 		ay = event.accelerationIncludingGravity.y * 5;
 		az = event.accelerationIncludingGravity.z * 5;
-        var prevOrientation = ori;
-        if (Math.abs(ay) > 20) {
-            ori = 1;
-        } else if (ax > 45) {
-            ori = 2;
-        } else {
-            ori = 0;
-        }
-            if (prevOrientation != ori) {
-                switchOrientation(ori);   
-            }
-//        projection.rotate([ax, ay]);
-//		document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
-//		document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
-//		document.getElementById("accelerationZ").innerHTML = e.accelerationIncludingGravity.z;
-
-//		if ( e.rotationRate ) {
-//			document.getElementById("rotationAlpha").innerHTML = e.rotationRate.alpha;
-//			document.getElementById("rotationBeta").innerHTML = e.rotationRate.beta;
-//			document.getElementById("rotationGamma").innerHTML = e.rotationRate.gamma;
 		}		
 	} else if (window.DeviceOrientationEvent != undefined) {
 //    var gravityMult = 90 /9.80665;
