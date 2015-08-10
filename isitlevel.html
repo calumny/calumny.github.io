@@ -160,9 +160,11 @@ d3.timer(function() {
     prevAy = rotate[1];
     var diffX = ax - prevAx;
     var diffY = ay - prevAy;
+    var xSign = diffX?diffX<0?-1:1:0;
+    var ySign = diffY?diffY<0?-1:1:0;
     var incX = 0;
     if (Math.abs(diffX) > vel) {
-        incX = vel * Math.sign(diffX);
+        incX = vel * xSign;
     } else {
         incX = diffX;
     }
