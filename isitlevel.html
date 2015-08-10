@@ -209,8 +209,11 @@ d3.timer(function() {
             orientation = 1;
         } else if (ax > 45) {
             orientation = 2;
+        } else {
+            orientation = 0;   
         }
             if (prevOrientation != orientation) {
+                alert(orientation);
                 switchOrientation(orientation);   
             }
 //        projection.rotate([ax, ay]);
