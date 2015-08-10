@@ -160,9 +160,11 @@ d3.timer(function() {
     prevAy = rotate[1];
     var diffX = ax - prevAx;
     var diffY = ay - prevAy;
-    var incX =  diffX * dt;
-    var incY =  diffY * dt;
-    rotate[0] = (prevAx + dt * vel) % 360;
+    if (Math.abs(diffX) > vel) {
+        rotate[0] = (prevAx + dt * vel * Math.sign(diffX)) % 360;
+    } else {
+        rotate[0] = (prevAx + dt * diffX) % 360;
+    }
     rotate[1] = (prevAy + dt * vel) % 360;
   projection.rotate([rotate[0], rotate[1]]);
 //  projection.rotate([ax, ay]);
