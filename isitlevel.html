@@ -101,8 +101,6 @@ svg = d3.select("body").append("svg")
 //var circle = d3.geo.circle().attr("r", 10);
 
     function setupGlobe() {
-        
-        d3.selectAll("svg > *").remove();
 
         svg.append("path")
             .datum({type: "Sphere"})
@@ -165,7 +163,6 @@ svg = d3.select("body").append("svg")
     }
     
 function setupVertical() { 
-        d3.selectAll("svg > *").remove();
 /*    
         var lineData = [ { "x": 100,   "y": 100},  { "x": 900,  "y": 100},
                      { "x": 900,  "y": 300}, { "x": 100,  "y": 300},
@@ -188,6 +185,7 @@ function setupVertical() {
 setupGlobe();
     
 function switchOrientation(orient) {
+    d3.selectAll("svg > *").remove();
     switch(orient) {
         case 0:
             setupGlobe();
