@@ -150,11 +150,11 @@ var az;
 d3.timer(function() {
   var dt = Date.now() - time;
   projection.rotate([ax, ay]);
-    projection
+/*    projection
       .transition()
       .duration(20)
       .attrTween("transform", tween);
-    
+    */
     function tween(d, i, a) {
       return d3.interpolateString("rotate(" + rotate[0] + "," +rotate[1] +")", "rotate(" + ax + "," +ay +")");
     }
