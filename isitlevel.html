@@ -15,7 +15,7 @@ path {
   stroke: #aaa;
 }
 
-.equator {
+.bullseye {
   stroke: red;
   stroke-width: 2px;
 }
@@ -25,11 +25,6 @@ path {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script>
 
-var xval = document.getElementById("xval");
-var yval = document.getElementById("yval");
-var zval = document.getElementById("zval");
-var sum = document.getElementById("sum");
-    
 var width = 1000,
     height = 1000,
     rotate = [10, -10],
@@ -48,8 +43,6 @@ var path = d3.geo.path()
 
 var graticule = d3.geo.graticule();
 
-//var circle = d3.geo.circle().attr("r", 10);
-
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
@@ -67,7 +60,7 @@ svg.append("path")
 svg.append("path")
     .datum({type: "Point", coordinates: [0,0]})
 //    .pointRadius(10)
-    .attr("class", "equator")
+    .attr("class", "bullseye")
     .style("fill", "red")
     .attr("d", path);
 
@@ -104,36 +97,33 @@ svg.append("line")
     .style("stroke", "black");
 
 var feature = svg.selectAll("path");
-var sound = document.getElementById("audio");
-
+    
 var ax;
 var ay;
-var az;
     
 d3.timer(function() {
   var dt = Date.now() - time;
   projection.rotate([ax, ay]);
   feature.attr("d", path);
-//          sound.play()
 });
 
  if (window.DeviceMotionEvent != undefined) {
-//    var gravityMult = 90 /9.80665;
-        window.ondevicemotion = function(e) {
+        
+     window.ondevicemotion = function(e) {
         
 		ax = event.accelerationIncludingGravity.x * 5;
 		ay = event.accelerationIncludingGravity.y * 5;
-		az = event.accelerationIncludingGravity.z * 5;
-		}		
-	} else if (window.DeviceOrientationEvent != undefined) {
-    var gravityMult = 90 /9.80665;
-        window.ondeviceorientation = function(e) {
+
+        }		
+} else if (window.DeviceOrientationEvent != undefined) {
+
+    window.ondeviceorientation = function(e) {
         
 		ax = -1 * event.gamma;
 		ay = event.beta;
-		az = event.alpha;
-		}		
-	}
+
+    }		
+}
 
 </script>
 </body>
