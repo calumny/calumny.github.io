@@ -25,6 +25,30 @@ path {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script>
 
+function iOS() {
+
+  var iDevices = [
+    'iPad Simulator',
+    'iPhone Simulator',
+    'iPod Simulator',
+    'iPad',
+    'iPhone',
+    'iPod'
+  ];
+
+  while (iDevices.length) {
+    if (navigator.platform === iDevices.pop()){ return true; }
+  }
+
+  return false;
+}
+    
+var orient = 1;
+    
+if (iOS()) {
+    orient = -1;
+}
+    
 var width = 1000,
     height = 1000,
     rotate = [10, -10],
