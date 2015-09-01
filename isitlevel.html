@@ -135,8 +135,8 @@ d3.timer(function() {
         
      window.ondevicemotion = function(e) {
         
-		ax = event.accelerationIncludingGravity.x * 5;
-		ay = event.accelerationIncludingGravity.y * 5;
+		ax = event.accelerationIncludingGravity.x * 5 * orient;
+		ay = event.accelerationIncludingGravity.y * 5 * orient;
 
         }		
 } else if (window.DeviceOrientationEvent != undefined) {
